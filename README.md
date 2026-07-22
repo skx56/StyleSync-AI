@@ -25,6 +25,19 @@ StyleSync AI provides a practical pipeline for synchronizing visual style across
 
 The package separates image I/O, prompt construction, LoRA utilities, optimization, export behavior, and web UI logic. Thin runner scripts expose the workflow for local use.
 
+## Architecture Diagram
+
+```mermaid
+flowchart LR
+  Input["Reference Image and Prompt"] --> IO["Image I/O Utilities"]
+  IO --> Prompt["Prompt Utilities"]
+  Prompt --> LoRA["LoRA Workflow"]
+  LoRA --> Optimize["Optimization Pipeline"]
+  Optimize --> Export["Export Utilities"]
+  Export --> Output["Styled Image Output"]
+  LoRA --> Gradio["Gradio Web UI"]
+```
+
 ## Technology Stack
 
 - PyTorch and diffusers ecosystem for generative image workflows.
