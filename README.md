@@ -1,175 +1,59 @@
-# StyleSync-AI
+# StyleSync AI
 
-AI-Powered Contextual Product Marketing Workflow with LoRA Style Transfer
+<p align="center">
+<img alt="Python" src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge" />
+  <img alt="PyTorch" src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge" />
+  <img alt="Hugging Face" src="https://img.shields.io/badge/Hugging%20Face-FFD21E?style=for-the-badge" />
+  <img alt="Gradio" src="https://img.shields.io/badge/Gradio-374151?style=for-the-badge" />
+  <img alt="Computer Vision" src="https://img.shields.io/badge/Computer%20Vision-5C3EE8?style=for-the-badge" />
+</p>
 
-## Overview
+<p align="center">
+  <strong>A visual style-transfer toolkit for training and applying LoRA-based style adaptation workflows.</strong>
+</p>
 
-StyleSync-AI is a powerful Python application that revolutionizes product marketing by combining AI style transfer with contextual placement. Built on the FLUX.1 Kontext dev model from Hugging Face, it enables marketers and designers to:
+StyleSync AI provides a practical pipeline for synchronizing visual style across generated or edited images. It includes command-line and web interfaces, image I/O utilities, LoRA handling, prompt helpers, optimization code, and export workflows.
 
-- Take product images as input
-- Apply selected branded visual styles using LoRA fine-tunes
-- Place and adapt styled products into diverse, photorealistic marketing scenes
-- Optimize bulk image generation for various digital advertising platforms
-- Support multi-LoRA blending, batch processing, and flexible command-line interface
+## Core Capabilities
 
-## 🎯 Key Features
+- Runs style-transfer workflows through command-line and web UI entry points.
+- Handles image loading, processing, prompt utilities, and export logic.
+- Integrates LoRA-based adaptation utilities.
+- Supports interactive experimentation through Gradio.
 
-- **Style Transfer**: Apply custom visual styles to products while preserving structure
-- **Contextual Placement**: Adapt products into diverse marketing environments with proper lighting and perspective
-- **Batch Processing**: Generate multiple marketing assets from a single product
-- **Scene Templates**: Choose from pre-defined marketing contexts or create custom scenes
-- **Multi-LoRA Support**: Blend multiple style models for unique brand aesthetics
-- **Extensible**: Modular architecture with helpers for prompt building, LoRA loading, and image I/O
-- **Web UI**: User-friendly interface for non-technical users
-- **Model Optimization**: Performance enhancements for faster generation
-- **Export Options**: Generate platform-specific versions of images for various marketing channels
-- **Branding Tools**: Add logos and watermarks to exported images
+## Technical Architecture
 
-## 🛠 Installation
+The package separates image I/O, prompt construction, LoRA utilities, optimization, export behavior, and web UI logic. Thin runner scripts expose the workflow for local use.
 
-1. Clone this repository:
+## Technology Stack
+
+- PyTorch and diffusers ecosystem for generative image workflows.
+- Transformers, accelerate, and xformers for model execution support.
+- Gradio for the local web interface.
+- Pillow and tqdm for image handling and workflow feedback.
+- Package-style Python module organization under stylesync.
+
+## Repository Structure
+
+- `run_stylesync.py` - CLI workflow entry point.
+- `run_web_ui.py` - Interactive web UI runner.
+- `stylesync/lora_utils.py` - LoRA helper utilities.
+- `stylesync/optimization.py` - Optimization workflow.
+- `stylesync/image_io.py` - Image input/output helpers.
+- `requirements.txt` - Python dependencies.
+
+## Getting Started
+
 ```bash
-git clone https://github.com/yourusername/StyleSync-AI.git
-cd StyleSync-AI
-```
-
-2. Install dependencies:
-```bash
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
-
-3. (Optional) Create a `loras` directory and add your LoRA model files (`.safetensors`):
-```bash
-mkdir loras
-# Copy your .safetensors files to the loras directory
-```
-
-## 📋 Usage
-
-### Basic Usage
-
-Generate a marketing image with a pre-defined style and scene:
-
-```bash
-python run_stylesync.py --product path/to/product.jpg --style luxury --scene-type billboard --scene-variant sunset
-```
-
-### Advanced Usage
-
-Batch process multiple products with different styles and scenes:
-
-```bash
-python run_stylesync.py \
-  --product product1.jpg product2.jpg \
-  --style minimalist luxury \
-  --scene-type billboard social_media \
-  --scene-variant sunset instagram \
-  --guidance-scale 3.5 \
-  --strength 0.65
-```
-
-### Web UI
-
-Launch the user-friendly web interface:
 
 ```bash
 python run_web_ui.py
 ```
 
-Options:
-```bash
-python run_web_ui.py --share --port 8080
-```
+## Professional Context
 
-### Optimization Options
-
-Use optimizations for faster generation:
-
-```bash
-python run_stylesync.py \
-  --product path/to/product.jpg \
-  --xformers \
-  --torch-compile \
-  --precision bf16
-```
-
-### Export Options
-
-Export to specific platforms:
-
-```bash
-python run_stylesync.py \
-  --product path/to/product.jpg \
-  --style luxury \
-  --scene-type billboard \
-  --export-platforms instagram_post facebook_post \
-  --add-branding \
-  --watermark "Your Brand" \
-  --logo path/to/logo.png
-```
-
-### Information Commands
-
-List all available scene types and variants:
-
-```bash
-python run_stylesync.py --list-scenes
-```
-
-List all available style templates:
-
-```bash
-python run_stylesync.py --list-styles
-```
-
-List all available export platforms and their dimensions:
-
-```bash
-python run_stylesync.py --list-platforms
-```
-
-### Custom Prompt
-
-Use a fully custom scene description:
-
-```bash
-python run_stylesync.py \
-  --product path/to/product.jpg \
-  --style luxury \
-  --custom-prompt "on a marble pedestal in a high-end boutique store with soft, warm lighting"
-```
-
-### Multi-LoRA Blending
-
-Blend multiple LoRA models with custom weights:
-
-```bash
-python run_stylesync.py \
-  --product path/to/product.jpg \
-  --style luxury minimalist \
-  --multi-lora \
-  --lora-weights 0.7 0.3 \
-  --scene-type billboard
-```
-
-## 📊 Examples
-
-Example functional prompt:
-> "Take a product image, apply the 'luxury minimalism' LoRA style, and place the styled product on a sunset-lit city billboard. Adjust lighting, reflection, and perspective to match the background scene."
-
-## 📋 Requirements
-
-- Python 3.9+
-- torch
-- diffusers (latest dev version from GitHub)
-- Pillow
-- tqdm, argparse
-
-## 🔗 References
-
-- [FLUX.1 Kontext dev on Hugging Face](https://huggingface.co/black-forest-labs/FLUX.1-Kontext-dev)
-- [Diffusers documentation](https://huggingface.co/docs/diffusers/index)
-
-## 📄 License
-
-[MIT License](LICENSE)
+This project demonstrates applied computer vision, model-workflow packaging, and user-facing experimentation tooling.
